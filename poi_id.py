@@ -57,20 +57,20 @@ labels, features = targetFeatureSplit(data)
 ###############################################################################
 ### Plot poi and non-poi features using a boxplot
 ###############################################################################
-#import matplotlib.pyplot as plt
-#poi_feature = []
-#non_poi_feature = []
+import matplotlib.pyplot as plt
+poi_feature = []
+non_poi_feature = []
 
-#for point in data:
-#    if int(point[0]) == 1:
-#        poi_feature.append(point[1])
-#    elif int(point[0]) == 0:
-#        non_poi_feature.append(point[1])
+for point in data:
+    if int(point[0]) == 1:
+        poi_feature.append(point[1])
+    elif int(point[0]) == 0:
+        non_poi_feature.append(point[1])
 
-#plt.figure()
-#plt.boxplot([poi_feature, non_poi_feature], labels=["Non-POI", "POI"])
-#plt.ylabel("feature")
-#plt.show()
+plt.figure()
+plt.boxplot([poi_feature, non_poi_feature], labels=["Non-POI", "POI"])
+plt.ylabel("feature")
+plt.show()
 
 ###############################################################################
 ### Task 4: Try a varity of classifiers
