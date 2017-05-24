@@ -30,7 +30,7 @@ data_dict.pop("THE TRAVEL AGENCY IN THE PARK", 0)
 ###############################################################################
 ### Task 3: Create new feature(s)
 ###############################################################################
-# New Feature
+# Engineered Features
 import pandas as pd
 import numpy as np
 
@@ -39,13 +39,9 @@ df['ratio_to_messages'] = \
   df['from_this_person_to_poi']/df['to_messages'].astype(float)
 df['ratio_from_messages'] = \
   df['from_poi_to_this_person']/df['from_messages'].astype(float)
-
 df = df.replace(np.nan,'NaN', regex=True)
-
 data_dict = pd.DataFrame.to_dict(df, orient='index')
-#new_features_list.remove('poi')
-#new_features_list.insert(0,'poi')
-#print data_dict
+
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
 
@@ -83,12 +79,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.feature_selection import SelectKBest
 from sklearn.decomposition import PCA
-from sklearn.tree import DecisionTreeClassifier
+#from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import StratifiedShuffleSplit
 
-pipe = make_pipeline(MinMaxScaler(), SelectKBest(), PCA(), GaussianNB())#\
+pipe = make_pipeline(MinMaxScaler(), SelectKBest(), PCA(), GaussianNB())
                      #DecisionTreeClassifier())
 #print pipe.steps[2]
 
@@ -103,7 +99,6 @@ params = dict(selectkbest__k = range(4, 8),
               )
 
 cv = StratifiedShuffleSplit(n_splits=20, test_size = 0.3, random_state = 42)
-
 gs = GridSearchCV(pipe, param_grid=params, cv=cv, scoring='f1')
 
 ###############################################################################
